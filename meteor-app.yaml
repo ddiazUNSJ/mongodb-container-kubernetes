@@ -1,0 +1,69 @@
+#antes subir los secretos al namespace donde se alojara la aplicacion 
+#kubectl create secret generic meteor-settings --from-file=./settings.json
+#kubectl create secret generic mongo-url --from-file=./mongo_url.txt
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sched # your project name
+  name: sched # your project deployment name
+  namespace: mongodb-dany
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1 # number of Pods your deployment creates
+  revisionHistoryLimit: 3 # number of old ReplicaSets to retain to allow rollback
+  selector:
+    matchLabels:
+      app: sched # your project name
+  strategy:
+    rollingUpdate:
+      maxSurge: 25% # maximum number of Pods that can be created over the desired number of Pods
+      maxUnavailable: 25% # maximum number of Pods that can be unavailable during the update process
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: sched # your project name
+    spec:
+      containers:
+      - env: # ENV variables for your project
+        - name: ROOT_URL
+          value: http://169.57.85.122:31301/ # https://my.domain/ string value http://169.57.85.122:31301/
+        - name: MONGO_URL
+          valueFrom: # value from previosly created Secret
+            secretKeyRef:
+              key: mongo_url.txt
+              name: mongo-url
+        - name: METEOR_SETTINGS
+          valueFrom: # value from previosly created Secret
+            secretKeyRef:
+              key: settings.json
+              name: meteor-settings
+        image: us.icr.io/meteorspace/hola-mundo:1 # us.icr.io/meteor-modules/amer-1 # your_username/project_name:some_tag # image of your app
+        imagePullPolicy: Always
+        name: sched # your project name
+        ports:
+        - containerPort: 80 # which port should be open on Pods
+          name: http-server
+          protocol: TCP
+        resources: {}
+      restartPolicy: Always
+     
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: sched
+  name: sched
+  namespace: mongodb-dany
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    nodePort: 31303
+  selector:
+    app: sched
+  type: NodePort

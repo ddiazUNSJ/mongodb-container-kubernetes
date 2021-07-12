@@ -4,7 +4,7 @@ metadata:
   labels:
     app: mongo-express
   name: mongo-express
-  namespace: mongo-db
+  namespace: mongodb-dany
 spec:
   selector:
     matchLabels:
@@ -43,12 +43,13 @@ metadata:
   labels:
     app: mongo-express
   name: mongo-express
-  namespace: mongo-db
+  namespace: mongodb-dany
 spec:
   ports:
   - name: http
     port: 8081
     protocol: TCP
+    nodePort: 31302 
   selector:
     app: mongo-express
   type: NodePort
