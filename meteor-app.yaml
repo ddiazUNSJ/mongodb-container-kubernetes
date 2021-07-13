@@ -8,7 +8,7 @@ metadata:
   labels:
     app: sched # your project name
   name: sched # your project deployment name
-  namespace: mongodb-dany
+  namespace: meteordev
 spec:
   progressDeadlineSeconds: 600
   replicas: 1 # number of Pods your deployment creates
@@ -29,7 +29,7 @@ spec:
       containers:
       - env: # ENV variables for your project
         - name: ROOT_URL
-          value: http://169.57.85.122:31301/ # https://my.domain/ string value http://169.57.85.122:31301/
+          value: http://169.51.207.128:31301/ # https://my.domain/ string value http://169.57.85.122:31301/
         - name: MONGO_URL
           valueFrom: # value from previosly created Secret
             secretKeyRef:
@@ -40,7 +40,7 @@ spec:
             secretKeyRef:
               key: settings.json
               name: meteor-settings
-        image: us.icr.io/meteorspace/hola-mundo:1 # us.icr.io/meteor-modules/amer-1 # your_username/project_name:some_tag # image of your app
+        image: us.icr.io/meteor-modules/amer-1:1 # us.icr.io/meteor-modules/amer-1  your_username/project_name:some_tag # image of your app
         imagePullPolicy: Always
         name: sched # your project name
         ports:
@@ -48,6 +48,8 @@ spec:
           name: http-server
           protocol: TCP
         resources: {}
+      imagePullSecrets:
+        - name: all-icr-io
       restartPolicy: Always
      
 ---
@@ -57,7 +59,7 @@ metadata:
   labels:
     app: sched
   name: sched
-  namespace: mongodb-dany
+  namespace: meteordev
 spec:
   ports:
   - name: http
@@ -67,3 +69,5 @@ spec:
   selector:
     app: sched
   type: NodePort
+
+  

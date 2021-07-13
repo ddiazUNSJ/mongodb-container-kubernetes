@@ -1,13 +1,13 @@
 #!/bin/bash
 CLUSTER_NAME=danyCluster
-NAMESPACE=mongodb-dany
+NAMESPACE=meteordev
 SERVICE_NAME_DATABASE=mongo-database
 SERVICE_NAME_EXPRESS=mongo-express
 
 # You need to connect to the your free Kubernetes Cluster on IBM Cloud first
 
 # Create and set namespace
-kubectl create ns $NAMESPACE
+# kubectl create ns $NAMESPACE
 kubectl config set-context --current --namespace=$NAMESPACE
 
 # Setup Docker image for the mongo db

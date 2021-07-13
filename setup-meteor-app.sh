@@ -1,6 +1,6 @@
 #!/bin/bash
 CLUSTER_NAME=danyCluster
-NAMESPACE=mongodb-dany
+NAMESPACE=meteordev
 SERVICE_NAME_METEOR=sched
 
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 CLUSTER_NAME=danyCluster
-NAMESPACE=mongodb-dany
+NAMESPACE=meteordev
 SERVICE_NAME_DATABASE=mongo-database
 SERVICE_NAME_EXPRESS=mongo-express
 SERVICE_NAME_METEOR=sched
@@ -8,10 +8,10 @@ SERVICE_NAME_METEOR=sched
 # You need to connect to the your free Kubernetes Cluster on IBM Cloud first
 
 # Create and set namespace
-kubectl create ns $NAMESPACE
+#kubectl create ns $NAMESPACE
 kubectl config set-context --current --namespace=$NAMESPACE
-kubectl create secret generic meteor-settings --from-file=./settings.json
-kubectl create secret generic mongo-url --from-file=./mongo_url.txt
+#kubectl create secret generic meteor-settings --from-file=./settings.json
+#kubectl create secret generic mongo-url --from-file=./mongo_url.txt
 
 # Setup Docker image for the mongo db
 kubectl apply -f mongo-docker.yaml
