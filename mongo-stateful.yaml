@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongo
+  name: mongo-stateful
 spec:
   selector:
     matchLabels:
-      app: mongo
-  serviceName: "mongo"
+      app: mongo-stateful
+  serviceName: "mongo-stateful"
   replicas: 3
   podManagementPolicy: Parallel
   template:
     metadata:
       labels:
-        app: mongo
+        app: mongo-stateful
     spec:
       terminationGracePeriodSeconds: 10
       affinity:
@@ -23,10 +23,10 @@ spec:
                - key: "app"
                  operator: In
                  values:
-                 - mongo
+                 - mongo-stateful
              topologyKey: "kubernetes.io/hostname"
       containers:
-      - name: mongo
+      - name: mongo-stateful
         image: mongo:3.4.1
         command:
         - mongod

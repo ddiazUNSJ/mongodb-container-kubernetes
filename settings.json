@@ -7,13 +7,13 @@
       "port" : "587",
       "receiver":"danieldiaz",
        "username": "labiaiunsj@gmail.com",
-      "password": "sched2019"
+      "password": "sched-pp"
 
         },
     "credentials" : {
       "url" : "https://api-oaas.docloud.ibmcloud.com/job_manager/rest/v1/",
       "client_id" : "api_e74cc408-9b25-47a0-a59e-ce87fc0ebcc2",
-      "subscriptionId" : "504063852"
+      "subscriptionId" : "504063852xx"
      }
 
     },
