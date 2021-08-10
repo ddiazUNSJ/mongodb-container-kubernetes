@@ -1,0 +1,22 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: hd3
+  namespace: meteordev
+  annotations:
+    ibm.io/auto-create-bucket: "false>"
+    ibm.io/auto-delete-bucket: "false>"
+    ibm.io/bucket: "opl-bucket"
+    #ibm.io/object-path: "<bucket_subdirectory>"
+    ibm.io/secret-name: "cos-write-access"
+    #ibm.io/endpoint: "https://<s3fs_service_endpoint>"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ibmc-s3fs-flex-regional 
+  volumeMode: Filesystem
+
+  
