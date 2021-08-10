@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: my-pvc-block-storage
+ labels:
+   billingType: "hourly"
+   region: us-south
+   zone: dal13
+spec:
+ accessModes:
+   - ReadWriteOnce
+ resources:
+   requests:
+     storage: 24Gi
+ storageClassName: ibmc-block-silver
