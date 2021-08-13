@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "264557894" 
+  labels:
+     failure-domain.beta.kubernetes.io/region: us-south
+     failure-domain.beta.kubernetes.io/zone: mex01
+spec:
+  capacity:
+    storage: "20Gi"
+  accessModes:
+    - ReadWriteOnce
+  flexVolume:
+    driver: "ibm/ibmc-block"
+    fsType: "ext4"
+    options:
+      "Lun": "0"
+      "TargetPortal": "10.2.190.98   "
+      "VolumeID": "264557894"
+      "volumeName": "SL02SEL2311452-2"
