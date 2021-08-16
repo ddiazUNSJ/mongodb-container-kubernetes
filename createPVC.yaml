@@ -5,11 +5,11 @@ metadata:
   labels:
     billingType: "hourly"
     region: us-south
-    zone: dal13
+    zone: mex01
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 24Gi
-  storageClassName: ibmc-block-silver
+      storage: 20Gi
+  storageClassName: ibmc-block-bronze
