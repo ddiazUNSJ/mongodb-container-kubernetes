@@ -1,4 +1,6 @@
-#antes subir los secretos al namespace donde se alojara la aplicacion 
+#antes copiar all-icr-io a namespace donde se ubicara la aplicacions
+# sino no va dejar copiar desde el container register de ibm donde subimos la app
+# Luego subir los secretos al namespace donde se alojara la aplicacion 
 #kubectl create secret generic meteor-settings --from-file=./settings.json
 #kubectl create secret generic mongo-url --from-file=./mongo_url.txt
 
@@ -29,7 +31,7 @@ spec:
       containers:
       - env: # ENV variables for your project
         - name: ROOT_URL
-          value: http://169.51.207.128:31301/ # https://my.domain/ string value http://169.57.85.122:31301/
+          value: http://169.57.43.8:31301/ # https://my.domain/ string value http://169.57.85.122:31301/
         - name: MONGO_URL
           valueFrom: # value from previosly created Secret
             secretKeyRef:

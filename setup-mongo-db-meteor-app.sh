@@ -8,10 +8,12 @@ SERVICE_NAME_METEOR=sched
 # You need to connect to the your free Kubernetes Cluster on IBM Cloud first
 
 # Create and set namespace
-#kubectl create ns $NAMESPACE
+kubectl create ns $NAMESPACE
 kubectl config set-context --current --namespace=$NAMESPACE
-#kubectl create secret generic meteor-settings --from-file=./settings.json
-#kubectl create secret generic mongo-url --from-file=./mongo_url.txt
+kubectl get secret all-icr-io -n default -o yaml | sed 's/namespace: default/namespace: meteordev/g' | kubectl -n meteordev create -f -
+
+kubectl create secret generic meteor-settings --from-file=./settings.json
+kubectl create secret generic mongo-url --from-file=./mongo_url.txt
 
 # Setup Docker image for the mongo db
 kubectl apply -f mongo-docker.yaml
